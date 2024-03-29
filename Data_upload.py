@@ -2,7 +2,7 @@ from pinecone import Pinecone
 import requests, os, random, string
 import pandas as pd
 from dotenv import load_dotenv
-
+from bs4 import BeautifulSoup
 
 load_dotenv()
 
@@ -64,11 +64,11 @@ def job_data(urls):
             print(f"Error with : {url}. Skipping this one")
             continue
         
-    data = zip(cnames,titles,skills,descriptions,stipend,urls)
-    with open('JobData.csv', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['Company_Name', 'JobTitles', 'Skills', 'Description','Stipend','Links'])  # Write header
-        writer.writerows(data)
+    # data = zip(cnames,titles,skills,descriptions,stipend,urls)
+    # with open('JobData.csv', 'a', newline='') as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(['Company_Name', 'JobTitles', 'Skills', 'Description','Stipend','Links'])  # Write header
+    #     writer.writerows(data)
 
     
 
