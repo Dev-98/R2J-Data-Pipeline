@@ -1,6 +1,7 @@
 from pinecone import Pinecone
 import requests, os, random, string
 import pandas as pd
+from datetime import datetime
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 
@@ -30,6 +31,7 @@ def upsert_data(text: str,company: str,stipend: str,JobTitles,skills,link,desc,n
     vector = generate_embedding(text)
 
     # Ids generation for vectors
+    id = datetime.datetime.now().str
     _id = ''.join(random.choices(string.ascii_letters + string.digits, k=10,))
 
     # Upserting vector into pinecone database
