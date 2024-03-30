@@ -1,2 +1,3 @@
 pinecone-client
 dotenv
+beautifulsoup4

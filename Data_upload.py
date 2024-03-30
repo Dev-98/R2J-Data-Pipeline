@@ -1,7 +1,7 @@
 from pinecone import Pinecone
 import requests, os, random, string
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 
@@ -31,8 +31,9 @@ def upsert_data(text: str,company: str,stipend: str,JobTitles,skills,link,desc,n
     vector = generate_embedding(text)
 
     # Ids generation for vectors
-    id = datetime.datetime.now().str
-    _id = ''.join(random.choices(string.ascii_letters + string.digits, k=10,))
+    _id = datetime.now().strftime("%y%m%d")
+
+    # _id = ''.join(random.choices(string.ascii_letters + string.digits, k=10,))
 
     # Upserting vector into pinecone database
     index.upsert(vectors=[{"id":_id, "values": vector, "metadata": metadata}]
@@ -73,13 +74,15 @@ def job_data(urls):
     #     writer.writerows(data)
 
     
-
 if __name__ == '__main__':
-    csv_path = 'newdata.csv'
-    data = pd.read_csv(csv_path)
+    csv_path = 'JobData.csv'
+    # data = pd.read_csv(csv_path)
     # job_data(links)
-    for i,desc in enumerate(data['Description']) :
-          print(i)
-          upsert_data(desc,data['Company_Name'][i],data['Stipend'][i],data['JobTitles'][i],data['Skills'][i],data['Links'][i],data['Description'][i],"internship")
+    one_week_ago = datetime.now() - timedelta(weeks=1)
+    formatted_date = one_week_ago.strftime("%y%m%d")
+    print(formatted_date)
+    # for i,desc in enumerate(data['Description']) :
+    #     print(i)
+    #     upsert_data(desc,data['Company_Name'][i],data['Stipend'][i],data['JobTitles'][i],data['Skills'][i],data['Links'][i],data['Description'][i],"internship")
 	# print(generate_embedding("hello world, this is a test data"))
 
