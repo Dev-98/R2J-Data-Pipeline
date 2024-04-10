@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_internshala_jobs(url):
+def scrape_internshala_job_links(url):
     
     # Fetching the number of pages to scrape
     response = requests.get(url)
@@ -26,4 +26,4 @@ def scrape_internshala_jobs(url):
 
 if __name__ == '__main__':
     url = f'https://internshala.com/internships/work-from-home-data-analysis,data-science,machine-learning,web-development-internship'
-    links = scrape_internshala_jobs(url)
+    links = scrape_internshala_job_links(url)
