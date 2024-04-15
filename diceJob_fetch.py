@@ -18,13 +18,13 @@ def scrape_dice_job_links(url):
     job_id = soup.find_all('div', class_='overflow-hidden')
 
     print(job_id[:5])
-    # for links in job_id:
-    #     links_job.append('https://dice.com/job-details/' + links.get('id'))
+    for links in job_id:
+        links_job.append('https://dice.com/job-details/' + links.get('id'))
 
-    # return links_job
+    return links_job
 
+if __name__ == "__main__":
 
+    url = f'https://www.dice.com/jobs?q=machine%20learning%20engineer&location=Remote,%20OR%2097458,%20USA&latitude=43.00594549999999&longitude=-123.8925908&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&filters.postedDate=SEVEN&language=en&eid=0904'
 
-url = f'https://www.dice.com/jobs?q=machine%20learning%20engineer&location=Remote,%20OR%2097458,%20USA&latitude=43.00594549999999&longitude=-123.8925908&countryCode=US&locationPrecision=City&radius=30&radiusUnit=mi&page=1&pageSize=20&filters.postedDate=SEVEN&language=en&eid=0904'
-
-scrape_dice_job_links(url)
+    scrape_dice_job_links(url)
